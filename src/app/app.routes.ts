@@ -19,7 +19,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/favourites/favourites.page').then( m => m.FavouritesPage)
   },
   {
-    path: 'person-details',
+    path: 'person-details/:id',
     loadComponent: () => import('./pages/person-details/person-details.page').then( m => m.PersonDetailsPage)
   },
   {

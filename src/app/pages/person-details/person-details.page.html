@@ -1,13 +1,57 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>person-details</ion-title>
+    <ion-title>Person Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">person-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding" *ngIf="person">
+
+  <ion-card>
+
+    <img [src]="getImage(person.profile_path)" />
+
+    <ion-card-header>
+      <ion-card-title>
+        {{ person.name }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p *ngIf="person.birthday">
+        <strong>DOB:</strong> {{ person.birthday }}
+      </p>
+
+      <p *ngIf="person.deathday">
+        <strong>DOD:</strong> {{ person.deathday }}
+      </p>
+
+      <p *ngIf="person.also_known_as?.length">
+        <strong>AKA:</strong>
+        {{ person.also_known_as.join(', ') }}
+      </p>
+
+      <p>
+        {{ person.biography }}
+      </p>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <h2>Other Movies</h2>
+
+  <ion-card *ngFor="let movie of movies"
+             [routerLink]="['/movie-details', movie.id]">
+
+    <img [src]="getImage(movie.poster_path)" />
+
+    <ion-card-header>
+      <ion-card-title>
+        {{ movie.title }}
+      </ion-card-title>
+    </ion-card-header>
+
+  </ion-card>
+
 </ion-content>

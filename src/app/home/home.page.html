@@ -6,18 +6,28 @@
 
 <ion-content class="ion-padding">
 
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionInput)="searchMovies()"
+    placeholder="Search movies">
+  </ion-searchbar>
+
   <h2>Today's Trending Movies</h2>
 
   <ion-card *ngFor="let movie of movies">
+
     <img [src]="getImage(movie.poster_path)" />
 
     <ion-card-header>
-      <ion-card-title>{{ movie.title }}</ion-card-title>
+      <ion-card-title>
+        {{ movie.title }}
+      </ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       {{ movie.overview }}
     </ion-card-content>
+
   </ion-card>
 
 </ion-content>

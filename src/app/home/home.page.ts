@@ -8,10 +8,11 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonImg
+  IonSearchbar
 } from '@ionic/angular/standalone';
 
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MovieService } from '../services/movie';
 
 @Component({
@@ -21,6 +22,7 @@ import { MovieService } from '../services/movie';
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -29,12 +31,13 @@ import { MovieService } from '../services/movie';
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    IonImg
+    IonSearchbar
   ],
 })
 export class HomePage implements OnInit {
 
   movies: any[] = [];
+  searchTerm: string = '';
 
   constructor(private movieService: MovieService) {}
 
@@ -45,8 +48,20 @@ export class HomePage implements OnInit {
   loadTrendingMovies() {
     this.movieService.getTrendingMovies().subscribe((response: any) => {
       this.movies = response.results;
-      console.log(this.movies);
     });
+  }
+
+  searchMovies() {
+
+    if (this.searchTerm.trim() === '') {
+      this.loadTrendingMovies();
+      return;
+    }
+
+    this.movieService.searchMovies(this.searchTerm)
+      .subscribe((response: any) => {
+        this.movies = response.results;
+      });
   }
 
   getImage(path: string) {

@@ -13,6 +13,7 @@ import {
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { MovieService } from '../services/movie';
 
 @Component({
@@ -23,6 +24,7 @@ import { MovieService } from '../services/movie';
   imports: [
     CommonModule,
     FormsModule,
+    RouterLink,
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -52,7 +54,6 @@ export class HomePage implements OnInit {
   }
 
   searchMovies() {
-
     if (this.searchTerm.trim() === '') {
       this.loadTrendingMovies();
       return;

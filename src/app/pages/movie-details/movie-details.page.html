@@ -17,6 +17,22 @@
       <p>{{ movie.overview }}</p>
       <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
       <p><strong>Rating:</strong> {{ movie.vote_average }}</p>
+
+      <br><br>
+
+      <ion-button
+        *ngIf="!isFavourite()"
+        (click)="addFavourite()">
+        Add To Favourites
+      </ion-button>
+
+      <ion-button
+        color="danger"
+        *ngIf="isFavourite()"
+        (click)="removeFavourite()">
+        Remove From Favourites
+      </ion-button>
+
     </ion-card-content>
   </ion-card>
 

@@ -7,12 +7,14 @@ import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
-  IonCardContent
+  IonCardContent,
+  IonButton
 } from '@ionic/angular/standalone';
 
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MovieService } from '../../services/movie';
+import { FavouritesService } from '../../services/favourites';
 
 @Component({
   selector: 'app-movie-details',
@@ -29,7 +31,8 @@ import { MovieService } from '../../services/movie';
     IonCard,
     IonCardHeader,
     IonCardTitle,
-    IonCardContent
+    IonCardContent,
+    IonButton
   ]
 })
 export class MovieDetailsPage implements OnInit {
@@ -40,20 +43,36 @@ export class MovieDetailsPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private favouritesService: FavouritesService
   ) {}
 
   ngOnInit() {
+
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.movieService.getMovieDetails(id).subscribe((response: any) => {
-      this.movie = response;
-    });
+    this.movieService.getMovieDetails(id)
+      .subscribe((response: any) => {
+        this.movie = response;
+      });
 
-    this.movieService.getMovieCredits(id).subscribe((response: any) => {
-      this.cast = response.cast.slice(0, 10);
-      this.crew = response.crew.slice(0, 10);
-    });
+    this.movieService.getMovieCredits(id)
+      .subscribe((response: any) => {
+        this.cast = response.cast.slice(0, 10);
+        this.crew = response.crew.slice(0, 10);
+      });
+  }
+
+  addFavourite() {
+    this.favouritesService.addFavourite(this.movie);
+  }
+
+  removeFavourite() {
+    this.favouritesService.removeFavourite(this.movie.id);
+  }
+
+  isFavourite(): boolean {
+    return this.favouritesService.isFavourite(this.movie.id);
   }
 
   getImage(path: string) {

@@ -1,17 +1,3 @@
-[
-  {
-    "id": 550,
-    "title": "Fight Club",
-    "poster_path": "/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"
-  },
-  {
-    "id": 680,
-    "title": "Pulp Fiction",
-    "poster_path": "/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg"
-  },
-  {
-    "id": 13,
-    "title": "Forrest Gump",
-    "poster_path": "/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg"
-  }
-]
+{
+  "mytest": true
+}
